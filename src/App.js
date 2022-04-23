@@ -17,9 +17,14 @@ function App() {
     gameOver: false,
     guessedWord: false
   })
-  const correctWord = "RIGHT"
+  const [correctWord, setCorrectWord] = useState("")
 
-  useEffect(() => { generateWordSet().then(result => setWordSet(result.wordSet)) }, [])
+  useEffect(() => {
+    generateWordSet().then(result => {
+      setWordSet(result.wordSet)
+      setCorrectWord(result.todaysWord.toUpperCase())
+    })
+  }, [])
 
   const onSelectLetter = (keyVal) => {
     if (currAttempt.letterPos > 4) return
